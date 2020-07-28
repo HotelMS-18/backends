@@ -1,0 +1,25 @@
+
+server:
+  port: 8200
+ 
+spring:
+  datasource:
+    username: root
+    password: 12345678
+    url: jdbc:mysql://47.104.67.214.:3306/hotelms?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+ 
+mybatis:
+  mapper-locations: classpath:mapping/**/*.xml
+  type-aliases-package: com.neusoft.oa.house.model,com.neusoft.oa.user.model,com.neusoft.oa.orders.model,com.neusoft.oa.admin.model
+ 
+pagehelper:
+ helperDialect: mysql
+ reasonable: true
+ supportMethodsArguments: true
+ params: count=countSql
+
+#showSql
+logging:
+  level:
+    com.neusoft.oa : debug
