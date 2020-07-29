@@ -11,7 +11,7 @@ spring:
  
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
-  type-aliases-package: com.neusoft.oa.house.model,com.neusoft.oa.user.model,com.neusoft.oa.orders.model,com.neusoft.oa.admin.model
+  type-aliases-package: com.neusoft.oa.house.model,com.neusoft.oa.user.model,com.neusoft.oa.orders.model,com.neusoft.oa.admin.model,com.neusoft.oa.role.model,com.neusoft.oa.permission.model
  
 pagehelper:
  helperDialect: mysql

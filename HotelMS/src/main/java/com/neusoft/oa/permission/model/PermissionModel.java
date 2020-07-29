@@ -2,8 +2,10 @@ package com.neusoft.oa.permission.model;
 
 import java.util.List;
 
-import com.neusoft.oa.role.model.RoleModel;
+import org.apache.ibatis.type.Alias;
 
+import com.neusoft.oa.role.model.RoleModel;
+@Alias("Permission")
 public class PermissionModel {
 	private Integer pid;
     private String permissionName;

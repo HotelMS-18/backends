@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.neusoft.oa.role.mapper.IRoleMapper">
 	<resultMap id="RoleResultMap" type="Role">
 		<id property="rid" column="rid"></id>
@@ -10,7 +10,7 @@
 		<result property="roleDesc" column="roleDesc" />
 		<!-- 一个角色有多种权限 -->
 		<collection property="permissions"
-			ofType="com.neusoft.oa.permission.model">
+			ofType="Permission">
 			<id property="pid" column="pid"></id>
 			<result property="permissionName" column="permissionName" />
 			<result property="url" column="url" />
@@ -20,7 +20,7 @@
 		select * from role where
 		id in (select roleId from users_role where userId=#{userId})
 	</select>
-	<select id="findAll" resultMap="RoleReaultMap">
+	<select id="findAll" resultMap="RoleResultMap">
 		select * from role
 	</select>
 	<select id="findById" resultMap="RoleResultMap">
@@ -32,7 +32,7 @@
 		permission where id not in (select permissionId from role_permission
 		where roleId=#{roleId})
 	</select>
-	<insert id="addRole" keyProperty="id" keyColumn="rid"
+	<insert id="save" keyProperty="id" keyColumn="rid"
 		useGeneratedKeys="true">
 		insert into role(roleName,roleDesc)
 		values(#{roleName},#{roleDesc})

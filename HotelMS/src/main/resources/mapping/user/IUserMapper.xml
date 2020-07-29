@@ -13,13 +13,13 @@
 		<result property="status" column="status" />
 		<!-- 一个用户有多个角色 -->
 		<collection property="roles"
-			ofType="com.neusoft.oa.role.model">
+			ofType="Role">
 			<id property="rid" column="rid"></id>
 			<result property="roleName" column="roleName" />
 			<result property="roleDesc" column="roleDesc" />
 			<!-- 一个角色有多种权限 -->
 			<collection property="permissions"
-				ofType="com.neusoft.oa.permission.model">
+				ofType="Permission">
 				<id property="pid" column="pid"></id>
 				<result property="permissionName" column="permissionName" />
 				<result property="url" column="url" />
@@ -29,19 +29,19 @@
 	<select id="findByUsername" resultMap="UserResultMap">
 		select * from users where userName = #{userName}
 	</select>
-	<select id="findAll" resultMap="UserReaultMap">
+	<select id="findAll" resultMap="UserResultMap">
 		select * from users
 	</select>
 	<select id="findById" resultMap="UserResultMap">
-		select * from users where uid = #{uid}
+		select * from users where id = #{uid}
 	</select>
 	<select id="findOtherRoles" resultMap="UserResultMap">
 		select * from role where id not in (select roleId from users_role where
 		userId=#{userId})
 	</select>
-	<insert id="addUser" keyProperty="id" keyColumn="uid"
+	<insert id="save" keyProperty="id" keyColumn="uid"
 		useGeneratedKeys="true">
-		insert into user(email,userName,password,phoneNum,status) values
+		insert into users(email,userName,password,phoneNum,status) values
 		(#{email},#{userName},#{password},#{phoneNum},#{status})
 	</insert>
 	<insert id="addRoletoUser">

@@ -11,17 +11,17 @@ public class HouseModel {
 	private String houseState = null;//房间状态
 	private double housePrice =0;//房间价格
 	private int houseNum = 0;//房间号
-	//private int count = 0;//空房间剩余数量
+	private int count = 0;//空房间剩余数量
 	
 	
 	
 	
-	/*public int getCount() {
+	public int getCount() {
 		return count;
 	}
 	public void setCount(int count) {
 		this.count = count;
-	}*/
+	}
 	public int getHid() {
 		return hid;
 	}

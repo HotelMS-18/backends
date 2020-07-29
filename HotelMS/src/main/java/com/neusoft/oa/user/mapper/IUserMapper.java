@@ -2,8 +2,8 @@ package com.neusoft.oa.user.mapper;
 
 import java.util.List;
 
-
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.neusoft.oa.role.model.RoleModel;
 import com.neusoft.oa.user.model.UserModel;
@@ -20,5 +20,5 @@ public interface IUserMapper {
 
 	List<RoleModel> findOtherRoles(String userId);
 
-	void addRoleToUser(String userId, String roleId);
+    void addRoleToUser(@Param("userId") String userId, @Param("roleId") String roleId);
 }

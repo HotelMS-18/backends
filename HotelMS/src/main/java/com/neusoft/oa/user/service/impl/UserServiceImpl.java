@@ -18,8 +18,6 @@ public class UserServiceImpl implements IUserService{
     @Autowired
 	private IUserMapper userMapper=null;
 
-    @Autowired
-
     @Override
     public void addRoleToUser(String userId, String[] roleIds) {
 

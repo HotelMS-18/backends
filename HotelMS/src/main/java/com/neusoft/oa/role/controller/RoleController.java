@@ -18,23 +18,23 @@ public class RoleController {
 	@Autowired
     private IRoleService roleService;
 
-    @RequestMapping("/save.do")
+    @RequestMapping(value="/save")
     public String save(RoleModel role) throws Exception {
         roleService.save(role);
-        return "redirect:findAll.do";
+        return "redirect:findAll";
     }
 
-    @RequestMapping("/findAll.do")
-    public ModelAndView findAll() throws Exception {
-        ModelAndView mv = new ModelAndView();
+    @RequestMapping(value="/findAll")
+    public List<RoleModel> findAll() throws Exception {
+        //ModelAndView mv = new ModelAndView();
         List<RoleModel> roleList = roleService.findAll();
-        mv.addObject("roleList", roleList);
-        mv.setViewName("role-list");
-        return mv;
+        //mv.addObject("roleList", roleList);
+        //mv.setViewName("role-list");
+        return roleList;
     }
 
     //角色详情查询
-    @RequestMapping("/findById.do")
+    @RequestMapping(value="/findById")
     public ModelAndView findById(@RequestParam(name = "id", required = true) String roleId) throws Exception {
         ModelAndView mv = new ModelAndView();
         RoleModel role = roleService.findById(roleId);
@@ -45,14 +45,14 @@ public class RoleController {
     }
 
     //给角色添加权限
-    @RequestMapping("/addPermissionToRole.do")
+    @RequestMapping(value="/addPermissionToRole")
     public String addPermissionToRole(@RequestParam(name = "roleId", required = true) String roleId, @RequestParam(name = "ids", required = true) String[] permissionIds) throws Exception {
         roleService.addPermissionToRole(roleId, permissionIds);
         return "redirect:findAll.do";
     }
 
     //根据roleId查询role，并查询出可以添加的权限
-    @RequestMapping("/findRoleByIdAndAllPermission.do")
+    @RequestMapping(value="/findRoleByIdAndAllPermission")
     public ModelAndView findRoleByIdAndAllPermission(@RequestParam(name = "id", required = true) String roleId) throws Exception {
         ModelAndView mv = new ModelAndView();
         //根据roleId查询role
