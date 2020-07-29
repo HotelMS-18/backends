@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.oa.orders.mapper.IOrdersMapper">
+
+  <resultMap id="OrdersResultMap" type="Order">
+  		<id property="oid" column="oid"></id>
+  		<result property="orderTime" column="orderTime"/>
+  		<result property="orderTimeStr" column="orderTimeStr"/>	
+  		<result property="orderPrice" column="orderPrice"/>
+  		<result property="orderStatus" column="orderStatus"/>
+  		<result property="comeTime" column="comeTime"/>
+  		<result property="comeTimeStr" column="comeTimeStr"/>
+  		<result property="departureTime" column="departureTime"/>
+  		<result property="departureTimeStr" column="departureTimeStr"/>
+  		<result property="houseId" column="houseId"/>
+  		<result property="userId" column="userId"/>
+  </resultMap>
+  
+  <resultMap id="OrdersHouseResultMap" type="Order" extends="OrdersResultMap">
+  		<association property="House" javaType="House">
+  			<id property="hid" column="hid"></id>
+  			<result property="houseName" column="houseName"/>
+  			<result property="houseState" column="houseState"/>	
+  			<result property="housePrice" column="housePrice"/>
+  			<result property="houseNum" column="houseNum"/>
+  			<result property="count" column="count"/>
+  		</association>
+  </resultMap>
+  
+  <resultMap id="OrdersUserResultMap" type="Order" extends="OrdersResultMap">
+  		<association property="User" javaType="User">
+  			<id property="hid" column="hid"></id>
+  			<result property="houseName" column="houseName"/>
+  			<result property="houseState" column="houseState"/>	
+  			<result property="housePrice" column="housePrice"/>
+  			<result property="houseNum" column="houseNum"/>
+  			<result property="count" column="count"/>
+  		</association>
+  </resultMap>
+
+
+  <insert id="addOrder" keyProperty="oid" keyColumn="oid" useGeneratedKeys="true">
+  insert into orders(orderStatus,orderPrice,orderTime,comeTime,departureTime,houseId,userId) values(#{orderStatus},#{orderPrice},#{orderTime},#{comeTime},#{departureTime},#{houseId},#{userId})
+  </insert>
+ 
+
+  <select id="findByUid" resultMap="OrdersResultMap">
+    select * from orders where userId = #{userId} order by orderTime desc
+  </select>
+  
+  <select id="findByOid" resultMap="OrdersResultMap">
+    select * from orders where oid = #{oid}
+  </select>
+  
+  <select id="findAll" resultMap="OrdersResultMap">
+    select * from orders order by orderTime desc
+  </select>
+
+  <select id="findReservedByPage" resultMap="OrdersResultMap">
+    select * from orders where orderStatus = #{orderStatus} order by orderTime desc
+  </select>
+
+  <update id="updateToReservedById">
+    update orders set orderStatus = #{orderStatus} where oid = #{oid}
+  </update>
+  
+  <update id="updateToCompleteById">
+    update orders set orderStatus = #{orderStatus} where oid = #{oid}
+  </update>
+  
+  <update id="updateToCancelById">
+    update orders set orderStatus = #{orderStatus} where oid = #{oid}
+  </update>
+  
+</mapper>

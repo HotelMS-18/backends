@@ -79,8 +79,8 @@
     select *,count(*) count from house where houseState =  #{houseState} group by houseName limits #{page},#{rows}
   </select>
   
-  <insert id="addHouse" keyProperty="id" keyColumn="hid" useGeneratedKeys="true">
-  insert into house(hid,houseName,houseState,housePrice,houseNum,count) values (#{hid},#{houseName},#{houseState},#{housePrice},#{houseNum},#{count})
+  <insert id="addHouse" keyProperty="hid" keyColumn="hid" useGeneratedKeys="true">
+  insert into house(hid,houseName,houseState,housePrice,houseNum) values (#{hid},#{houseName},#{houseState},#{housePrice},#{houseNum})
   </insert>
   
   <update id="updateHouse">

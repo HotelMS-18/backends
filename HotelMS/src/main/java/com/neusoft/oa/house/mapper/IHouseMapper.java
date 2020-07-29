@@ -12,15 +12,15 @@ public interface IHouseMapper {
 
 	List<HouseModel> findAllVacant(String houseState);//查询空房
 	
-	List<HouseModel> findByName(String houseName, String houseState);//根据房名查找房间
+	List<HouseModel> findByName(@Param("houseName")String houseName, @Param("houseState")String houseState);//根据房名查找房间
 	
 	HouseModel findById(int houseId);//根据id查找房间
 	
-	void updateToReservedById(int houseId, String houseState);//根据id修改房间状态为预定
+	void updateToReservedById(@Param("hid")int hid, @Param("houseState")String houseState);//根据id修改房间状态为预定
 	
-	void updateToNotVacant(int houseId, String houseState);//根据id修改房间状态为住人
+	void updateToNotVacant(@Param("hid")int hid, @Param("houseState")String houseState);//根据id修改房间状态为住人
 	
-	void updateToVacant(int houseId, String houseState);//根据id修改房间状态为空房
+	void updateToVacant(@Param("hid")int hid, @Param("houseState")String houseState);//根据id修改房间状态为空房
 	
 	List<HouseModel> findAllHouse();//查询全部房间
 	
@@ -38,7 +38,7 @@ public interface IHouseMapper {
 
 	List<HouseModel> findNotVacant(String houseState);//查找住人的房间
 	
-	public List<HouseModel> findAllByPage(String houseState, int page, int rows);//分页模式
+	public List<HouseModel> findAllByPage(@Param("houseState")String houseState, @Param("page")int page, @Param("rows")int rows);//分页模式
 	
 	//多条件查询
 	List<HouseModel> findByMutiCondition(@Param("houseName") String houseName, @Param("houseState") String houseState);
