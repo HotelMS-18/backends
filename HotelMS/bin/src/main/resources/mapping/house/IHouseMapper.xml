@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.oa.house.mapper.IHouseMapper">
+
+  <resultMap id="HouseResultMap" type="House">
+  		<id property="hid" column="hid"></id>
+  		<result property="houseName" column="houseName"/>
+  		<result property="houseState" column="houseState"/>	
+  		<result property="housePrice" column="housePrice"/>
+  		<result property="houseNum" column="houseNum"/>
+  		<result property="count" column="count"/>
+  </resultMap>
+
+ 
+
+  <select id="findAllVacant" resultMap="HouseResultMap">
+    select *,count(*) count from house where houseState = #{houseState} group by houseName
+  </select>
+  
+  <select id="findByName" resultMap="HouseResultMap">
+    select * from house where houseName = #{houseName} and houseState = #{houseState}
+  </select>
+  
+  <select id="findById" resultMap="HouseResultMap">
+    select * from house where hid = #{hid}
+  </select>
+
+  <update id="updateToReserveById">
+    update house set houseState =  #{houseState} where hid = #{hid}
+  </update>
+  
+  <update id="updateToNotVacant">
+    update house set houseState = #{houseState} where hid = #{hid}
+  </update>
+  
+  <update id="updateToVacant">
+    update house set houseState =  #{houseState} where hid = #{hid}
+  </update>
+  
+  <select id="findAllHouse" resultMap="HouseResultMap">
+    select * from house
+  </select>
+  
+  <select id="findAllCount" resultType="_int">
+    select count(*) from house
+  </select>
+  
+  <select id="findVacantCount" resultType="_int">
+    select count(*) from house where houseState = #{houseState}
+  </select>
+  
+  <select id="findPreserveCount" resultType="_int">
+    select count(*) from house where houseState =  #{houseState}
+  </select>
+  
+  <select id="findPeopleCount" resultType="_int">
+    select count(*) from house where houseState=  #{houseState}
+  </select>
+  
+  <select id="findByHouseName" resultMap="HouseResultMap">
+    select * from house where houseName = #{houseName}
+  </select>
+  
+  <select id="findByHouseState" resultMap="HouseResultMap">
+    select * from house where houseState = #{houseState}
+  </select>
+  
+  <select id="findNotVacant" resultMap="HouseResultMap">
+    select * from house where houseState=  #{houseState}
+  </select>
+  
+  <select id="findByMutiCondition" resultMap="HouseResultMap">
+    select * from house where houseName = #{houseName} and houseState = #{houseState}
+  </select>
+  
+  <select id="findAllByPage" resultMap="HouseResultMap">
+    select *,count(*) count from house where houseState =  #{houseState} group by houseName limits #{page},#{rows}
+  </select>
+  
+  <insert id="addHouse" keyProperty="id" keyColumn="hid" useGeneratedKeys="true">
+  insert into house(hid,houseName,houseState,housePrice,houseNum,count) values (#{hid},#{houseName},#{houseState},#{housePrice},#{houseNum},#{count})
+  </insert>
+  
+  <update id="updateHouse">
+  update house set houseName=#{houseName},houseState=#{houseState},housePrice=#{housePrice},houseNum=#{houseNum},count=#{count} where hid=#{hid}
+  </update>
+  
+  <delete id="deleteHouse">
+  delete from house where hid=#{id}
+  </delete>
+  
+  
+  
+</mapper>

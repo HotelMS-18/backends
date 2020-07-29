@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.oa.user.mapper.IUserMapper">
+
+	<resultMap id="UserResultMap" type="User">
+		<id property="uid" column="uid"></id>
+		<result property="username" column="userName" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="phoneNum" column="phoneNum" />
+		<result property="status" column="status" />
+		<!-- 一个用户有多个角色 -->
+		<collection property="roles"
+			ofType="com.neusoft.oa.role.model">
+			<id property="rid" column="rid"></id>
+			<result property="roleName" column="roleName" />
+			<result property="roleDesc" column="roleDesc" />
+			<!-- 一个角色有多种权限 -->
+			<collection property="permissions"
+				ofType="com.neusoft.oa.permission.model">
+				<id property="pid" column="pid"></id>
+				<result property="permissionName" column="permissionName" />
+				<result property="url" column="url" />
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="findByUsername" resultMap="UserResultMap">
+		select * from users where userName = #{userName}
+	</select>
+	<select id="findAll" resultMap="UserReaultMap">
+		select * from users
+	</select>
+	<select id="findById" resultMap="UserResultMap">
+		select * from users where uid = #{uid}
+	</select>
+	<select id="findOtherRoles" resultMap="UserResultMap">
+		select * from role where id not in (select roleId from users_role where
+		userId=#{userId})
+	</select>
+	<insert id="addUser" keyProperty="id" keyColumn="uid"
+		useGeneratedKeys="true">
+		insert into user(email,userName,password,phoneNum,status) values
+		(#{email},#{userName},#{password},#{phoneNum},#{status})
+	</insert>
+	<insert id="addRoletoUser">
+		insert into user_role(userId,roleId)values(#{userId},#{roldId})
+	</insert>
+</mapper>

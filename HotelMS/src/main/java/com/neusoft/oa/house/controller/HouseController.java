@@ -2,17 +2,12 @@ package com.neusoft.oa.house.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.neusoft.oa.house.model.HouseModel;
 import com.neusoft.oa.house.service.IHouseService;
-import com.neusoft.oa.house.service.impl.HouseServiceImpl;
 
 @RestController
 @RequestMapping(value="/house")

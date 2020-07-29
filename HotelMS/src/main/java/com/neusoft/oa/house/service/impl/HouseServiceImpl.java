@@ -12,7 +12,7 @@ import com.neusoft.oa.house.mapper.IHouseMapper;
 import com.neusoft.oa.house.model.HouseModel;
 import com.neusoft.oa.house.service.IHouseService;
 
-@Service
+@Service("HouseService")
 @Transactional
 public class HouseServiceImpl implements IHouseService{
 
