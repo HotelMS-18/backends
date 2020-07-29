@@ -3,7 +3,9 @@ package com.neusoft.oa.house.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.oa.house.model.HouseModel;
@@ -66,33 +68,33 @@ public class HouseController {
     }
     
     //修改房间为空
-    @RequestMapping("/updateToVacant")
+    @PostMapping("/updateToVacant")
     public void updateToVacant(int hid) {
     	houseService.updateToVacant(hid);
     }
     
     //修改房间为住人
-    @RequestMapping("/updateToNotVacant")
+    @PostMapping("/updateToNotVacant")
     public void updateToNotVacant(int hid) {
     	houseService.updateToPeople(hid);;
     }
     
   //查询全部房间(分页查询)
     @RequestMapping("/findAllByPage")
-    public List<HouseModel> findAllByPage(int page, int rows){
-    	return houseService.findAllByPage(page, rows);
+    public List<HouseModel> findAllByPage(@RequestParam(name = "page" , required = true,defaultValue = "1") int page, @RequestParam(name = "size",required = true,defaultValue = "5") int size){
+    	return houseService.findAllByPage(page, size);
     }
     
     //增加房间
-    @RequestMapping("/addHouse")
+    @PostMapping("/addHouse")
     public void addHouse(HouseModel house) {
     	houseService.addHouse(house);
     }
     
-    //修改房间
-    @RequestMapping("/updateHouse")
-    public void updateHouse(HouseModel house) {
-    	houseService.updateHouse(house);
+    //修改房间状态为预订
+    @PostMapping("/updateToReserved")
+    public void updateHouse(int hid) {
+    	houseService.updateToPresent(hid);
     }
     
     

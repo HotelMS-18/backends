@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 //import com.github.pagehelper.PageHelper;
 import com.neusoft.oa.house.mapper.IHouseMapper;
 import com.neusoft.oa.house.model.HouseModel;
@@ -110,9 +111,9 @@ public class HouseServiceImpl implements IHouseService{
 	@Override
 	public List<HouseModel> findAllByPage(int page, int rows) {
 		// TODO Auto-generated method stub
-		//PageHelper.startPage(page,rows);
-		List<HouseModel> list = houseMapper.findAllByPage("空房", page, rows);
-        return list;
+		PageHelper.startPage(page,rows);
+		List<HouseModel> list = houseMapper.findAllHouse();
+		return list;
 	}
 
 	@Override

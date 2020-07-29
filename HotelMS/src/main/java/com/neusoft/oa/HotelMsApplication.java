@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 @SpringBootApplication
-@MapperScan(basePackages={"com.neusoft.oa.house.mapper"})
+@MapperScan(basePackages={"com.neusoft.oa.house.mapper","com.neusoft.oa.orders.mapper"})
 public class HotelMsApplication {
 
 	public static void main(String[] args) {
